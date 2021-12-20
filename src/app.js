@@ -1,3 +1,4 @@
+Var PORT=process.env.PORT ||5000;
 const connection= require('./Dbconnection/connection');
 const sequelize = require('./Dbconnection/connection');
 
@@ -25,7 +26,7 @@ app.use('/auth',auth)
 app.use('/otp',otp)
 app.use('/password',password)
 
-app.listen(9000,function(err)
+app.listen(PORT,function(err)
 {
     console.log('connected')
 })
