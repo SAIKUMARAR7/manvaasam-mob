@@ -1,4 +1,4 @@
-Var PORT=process.env.PORT ||5000;
+const PORT=process.env.PORT ||5000;
 const connection= require('./Dbconnection/connection');
 const sequelize = require('./Dbconnection/connection');
 
