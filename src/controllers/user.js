@@ -49,5 +49,30 @@ async function registeruser(req,res){
 
     }
 
+async function profile(req,res){
+    try{
+        User=await user.findOne({where:{email:req.body.email}})
+        user_profile={name:User.name,email:User.email,mobile:User.mobile}
+        const response = new ResponseBody(true, "profile fetched sucessfully",user_profile);
+        res.send(response)
+    }
+    catch(e){
+        errorinuser('user_profile',e)
+    }
+}
 
-module.exports={registeruser}
+async function home_page(req,res){
+    try{
+        products=await product.findAll({limit:4,order:[['createdAt','DESC']]})
+        courses=await course.findAll({limit:4,order:[['createdAt','DESC']]})
+        const response = new ResponseBody(true, "profile fetched sucessfully",{products,courses});
+        res.send(response)
+    }
+    catch(e){
+        errorinuser('home_page',e)
+    }
+
+    }
+    
+    
+module.exports={registeruser,profile,home_page}
