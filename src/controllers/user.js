@@ -73,6 +73,17 @@ async function home_page(req,res){
     }
 
     }
+
+    function demo(req,res){
+        try{
+            const response = new ResponseBody(true, "sucess");
+            res.send(response)
+        }
+        catch(e){
+            errorinuser('demo',e)
+        }
+    
+        }
     
     
-module.exports={registeruser,profile,home_page}
+module.exports={registeruser,profile,home_page,demo}
