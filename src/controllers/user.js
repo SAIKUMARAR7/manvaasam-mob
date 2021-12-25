@@ -39,7 +39,7 @@ async function registeruser(req,res){
         
         const password = await bcrypt.hash(req.body.password,parseInt(process.env.SALT_ROUNDS))
         user.create({userid:userId,name:name,email:email,mobile:mobile,password:password,verified:false})
-        const response = new ResponseBody(true, "otp sented sucessfully", {});
+        const response = new ResponseBody(true, "otp sented successfully", {});
         res.send(response)
     }
 }
