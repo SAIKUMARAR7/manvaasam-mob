@@ -23,8 +23,9 @@ async function registeruser(req,res){
         res.status(400).send(response);
     }
     const oldUser = await user.findOne({where:{email:req.body.email}});
+    const oldMobile = await user.findOne({where:{mobile:req.body.mobile}});
 
-    if (oldUser) {
+    if (oldUser || oldMobile) {
         const response = new ResponseBody(false, "User Already Exist. Please Login", {});
         return res.status(409).send(response);
     }
