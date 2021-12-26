@@ -26,8 +26,17 @@ async function registeruser(req,res){
     const oldMobile = await user.findOne({where:{mobile:req.body.mobile}});
 
     if (oldUser || oldMobile) {
-        const response = new ResponseBody(false, "User Already Exist. Please Login", {});
-        return res.status(409).send(response);
+        if(oldUser)
+        {
+            const response = new ResponseBody(false, "Email Already Exist. Please Login", {});
+            return res.status(409).send(response);
+        }
+        if(oldMobile)
+        {
+            const response = new ResponseBody(false, "Mobile Number Already Exist. Please Login", {});
+            return res.status(409).send(response);
+        }
+        
     }
     else{
         const otp=generateOtp(req.body.email)

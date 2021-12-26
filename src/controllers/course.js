@@ -4,6 +4,9 @@ const router= express.Router();
 const app=express()
 const {v4}=require('uuid');
 const {ResponseBody} = require('../utils/response')
+const path=require('path');
+var fs=require('fs')
+const formidable = require('formidable');
 
 function errorinuser(fn,err)
 {
@@ -14,12 +17,18 @@ function errorinuser(fn,err)
 
 function addcourse(req,res){  
     try{
-    const courseid=v4()
-    var coursename=req.body.coursename
-    var instructor=req.body.instructor
-    course.create({courseid:courseid,name:coursename,instructor:instructor})
-    const response = new ResponseBody(true, "course added successfully", {"name":coursename});
-    res.send(response)
+        let form=new formidable.IncomingForm();
+        form.keepExtension=true;
+        form.parse(req,(err,fields,files)=>
+        {
+            var image=fs.readFileSync(files.image.filepath); 
+            const courseid=v4()
+            var coursename=req.body.coursename
+            var instructor=req.body.instructor
+            course.create({courseid:courseid,name:coursename,instructor:instructor,image:image})
+            const response = new ResponseBody(true, "course added successfully", {"name":coursename});
+            res.send(response)
+        });
     }
     catch(e){
         errorinuser('addcourse',e)

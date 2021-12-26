@@ -5,5 +5,6 @@ module.export= product=sequelize.define('products',{
     productid:{type:Sequelize.STRING,primaryKey:true,unique:true,allowNull:false},
     name:{type:Sequelize.STRING,allownull:false},
     price:{type:Sequelize.INTEGER,allowNull:false},
-    description:{type:Sequelize.TEXT,allowNull:true}},{modelName:"product"})
+    description:{type:Sequelize.TEXT,allowNull:true},
+    image:{type:Sequelize.BLOB,allowNull:true}},{modelName:"product"})
 sequelize.sync()
