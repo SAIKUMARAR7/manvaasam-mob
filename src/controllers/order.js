@@ -20,16 +20,17 @@ async function addorder(req,res){
     const useraddress=await address.findOne({where:{userid:User.userid}});
     if(useraddress)
     {
-    const orderlist=req.body.userorder;
-    const status='pending'
-    // const orderedproduct=await product.findOne({where:{productid:req.body.productid}})
-    // const amount=orderedproduct.price * parseInt(req.body.count)
-    const orderid=v4()
-    orders.create({orderid:orderid,userid:User.userid,productid:parseInt(req.body.productid),Items:orderlist,status:status})
-    const response = new ResponseBody(true, "product ordered successfully", {});
-    res.send(response)
+        const orderlist=req.body.userorder;
+        const status='pending'
+        // const orderedproduct=await product.findOne({where:{productid:req.body.productid}})
+        // const amount=orderedproduct.price * parseInt(req.body.count)
+        const orderid=v4()
+        orders.create({orderid:orderid,userid:User.userid,productid:parseInt(req.body.productid),Items:orderlist,Status:status})
+        const response = new ResponseBody(true, "product ordered successfully", {});
+        res.send(response)
     }
-    else{
+    else
+    {
         const response = new ResponseBody(true, "Please add your address before placing order", {});
         res.send(response)
     }
