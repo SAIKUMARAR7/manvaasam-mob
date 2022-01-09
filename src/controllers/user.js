@@ -73,8 +73,8 @@ async function profile(req,res){
 
 async function home_page(req,res){
     try{
-        products=await product.findAll({limit:4,order:[['createdAt','DESC']]})
-        courses=await course.findAll({limit:4,order:[['createdAt','DESC']]})
+        products=await product.findAll({limit:3,order:[['createdAt','DESC']]})
+        courses=await course.findAll({limit:3,order:[['createdAt','DESC']]})
         const response = new ResponseBody(true, "profile fetched sucessfully",{products,courses});
         res.send(response)
     }
