@@ -23,8 +23,9 @@ function addcourse(req,res){
         {
             var image=fs.readFileSync(files.image.filepath); 
             const courseid=v4()
-            var coursename=req.body.coursename
-            var instructor=req.body.instructor
+            var coursename=fields.coursename
+            var instructor=fields.instructor
+            
             course.create({courseid:courseid,name:coursename,instructor:instructor,image:image})
             const response = new ResponseBody(true, "course added successfully", {"name":coursename});
             res.send(response)
