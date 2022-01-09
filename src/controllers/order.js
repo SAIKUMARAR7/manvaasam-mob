@@ -45,6 +45,7 @@ async function myorders(req,res){
     try{
     const User=await user.findOne({where:{email:req.body.email}});
     const myorders=await orders.findAll({where:{userid:User.userid}})
+    // console.log(myorders)
     const response = new ResponseBody(true, "orders fetched successfully", myorders);
     res.send(response)
     }
