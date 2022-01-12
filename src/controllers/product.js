@@ -7,11 +7,8 @@ const path=require('path');
 var fs=require('fs')
 const {ResponseBody} = require('../utils/response');
 const formidable = require('formidable');
-
-var LZString =require('lz-string');
-var zlib=require('zlib')
-
-
+const zlib=require('zlib')
+var LZUTF8 = require('lzutf8');
 function errorinuser(fn,err)
 {
     console.log("error at",fn)
@@ -19,35 +16,24 @@ function errorinuser(fn,err)
 
 }
 
- function addproduct(req,res){
+ async function addproduct(req,res){
     try{
         let form=new formidable.IncomingForm();
         form.keepExtension=true;
-        form.parse(req,(err,fields,files)=>
+      form.parse (req, (err,fields,files)=>
         {
-            var image=fs.readFileSync(files.image.filepath); 
-            
-            //var compressedimg=zlib.deflate(image)
-            zlib.deflate(image, (err, buffer) => {
-  
-                if (!err) {
+            var image=fs.readFileSync(files.image.filepath);
+            const productid = v4();
+            var productname=fields.productname
+            var price=fields.price
+            var description=fields.description
+
+           product.create({productid:productid,name:productname,price:price,description:description,image:image})
+            const response = new ResponseBody(true, "product added successfully", {name:productname});
+            res.send(response);
                 
-                  image_str=buffer.toString('base64');
-                  const productid = v4();
-                    var productname=fields.productname
-                    var price=fields.price
-                    var description=fields.description
-                    product.create({productid:productid,name:productname,price:price,description:description,image:image_str})
-                    const response = new ResponseBody(true, "product added successfully", {name:productname});
-                    res.send(response);
-                } 
-                else {
-                  console.log(err);
-                }
-              });
-            
               
-            //console.log(compressedimg)
+
             
         })
     }
@@ -59,11 +45,12 @@ function errorinuser(fn,err)
 
      }
 
+     
+
 async function getallproducts(req,res){
     try{
         var products=await product.findAll()
-        console.log(products[0].name)
-        console.log(products[0].image)
+        
         const response = new ResponseBody(true, "product fetched successfully", products);
         res.send(response)
     }
@@ -73,6 +60,20 @@ async function getallproducts(req,res){
     }
 
     }
+
+    async function getproduct(req,res){
+        try{
+            const products = await product.findOne({where:{productid:req.body.productid}})
+            const response = new ResponseBody(true, "product fetched successfully", products);
+            res.send(response)
+        }
+        catch(e)
+        {
+            errorinuser('getproduct',e)
+        }
+    
+        }
+    
 
 const deleteProduct = async(req,res) => {
     try{
@@ -94,6 +95,6 @@ const deleteProduct = async(req,res) => {
 }
     
 
-module.exports={addproduct,getallproducts,deleteProduct}
+module.exports={addproduct,getallproducts,deleteProduct,getproduct}
 
    

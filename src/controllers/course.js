@@ -38,6 +38,7 @@ function addcourse(req,res){
     }
 async function getallcourses(req,res){  
     try{
+        
     var courses=await course.findAll()
     const response = new ResponseBody(true, "course fetched successfully",courses);
     res.send(response)

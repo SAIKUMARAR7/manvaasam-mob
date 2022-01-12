@@ -26,7 +26,7 @@ async function login(req,res)
                 if (cmp) {
                     const token = jwt.sign(
                         { userid:User.userid },process.env.JWT_KEY,
-                        {expiresIn: "10h",}
+                        {expiresIn: "30h",}
                       );
                     const response = new ResponseBody(true, "Login successfull", {"Token":token});
                     res.send(response);
