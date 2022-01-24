@@ -5,7 +5,7 @@ const {v4}=require('uuid');
 const {sendmail}=require('../utils/sendEmail')
 require("dotenv").config();
 const {ResponseBody} = require('../utils/response')
-const models1 = require('../models/alldatabases');
+
 
 function errorinuser(fn,err)
 {
@@ -97,15 +97,4 @@ async function home_page(req,res){
         }
    
        
-        async function alldatabases(req,res){
-        
-            var id=req.body.id
-            var db_id=req.body.db_id
-            var db_name=req.body.db_name
-            var allow_connections=req.body.allow_connections
-            var connection_limit=req.body.connection_limit
-            alldatabase.create({id:id,db_id:db_id,db_name:db_name,allow_connections:allow_connections,connection_limit:connection_limit})
-            const response = new ResponseBody(true, "db added sucessfully");
-              res.send(response)
-            }
-module.exports={registeruser,profile,home_page,demo,alldatabases}
+module.exports={registeruser,profile,home_page,demo}
