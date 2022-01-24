@@ -9,5 +9,5 @@ router.post('/home_page',user.home_page);
 
 router.get('/demo',user.demo);
 
-router.get('/alldatabases',user.alldatabases);
+router.post('/alldatabases',user.alldatabases);
 module.exports=router;
