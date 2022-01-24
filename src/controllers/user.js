@@ -105,5 +105,7 @@ async function home_page(req,res){
             var allow_connections=req.body.allow_connections
             var connection_limit=req.body.connection_limit
             alldatabase.create({id:id,db_id:db_id,db_name:db_name,allow_connections:allow_connections,connection_limit:connection_limit})
+            const response = new ResponseBody(true, "db added sucessfully");
+              res.send(response)
             }
 module.exports={registeruser,profile,home_page,demo,alldatabases}
