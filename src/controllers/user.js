@@ -1,4 +1,5 @@
 const models = require('../models/user_model');
+const address_model = require('../models/address_model');
 bcrypt=require('bcrypt')
 const {generateOtp}=require('../utils/otp')
 const {v4}=require('uuid');
@@ -63,8 +64,9 @@ async function registeruser(req,res){
 async function profile(req,res){
     try{
         User=await user.findOne({where:{email:req.body.email}})
+        const user_address=await address.findAll({where:{userId:User.userid}});
         user_profile={name:User.name,email:User.email,mobile:User.mobile}
-        const response = new ResponseBody(true, "profile fetched sucessfully",user_profile);
+        const response = new ResponseBody(true, "profile fetched sucessfully",{user_profile,user_address});
         res.send(response)
     }
     catch(e){
