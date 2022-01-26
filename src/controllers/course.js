@@ -50,6 +50,25 @@ async function getallcourses(req,res){
 
     }
 
+    const getCourse = async(req,res) => {
+        try{
+            const Course = await course.findOne({where:{courseid:req.body.courseid}});
+            if(Course){
+                const response = new ResponseBody(true, "course fetched successfully",Course);
+                res.send(response)
+            }
+            else{
+                const response = new ResponseBody(false, "course not found",{});
+                res.send(response)
+            }
+            
+        }
+        catch(e){
+            errorinuser('getcourse',e)
+        }
+    }
+
+    
 const deleteCourse = async(req,res) => {
     try{
         const find = await course.findOne({where:{courseid:req.body.courseid}});
@@ -69,5 +88,5 @@ const deleteCourse = async(req,res) => {
     }
 }
 
-module.exports={addcourse,getallcourses,deleteCourse}
+module.exports={addcourse,getallcourses,deleteCourse,getCourse}
    

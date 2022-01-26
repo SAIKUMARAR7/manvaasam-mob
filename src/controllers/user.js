@@ -85,28 +85,5 @@ async function home_page(req,res){
 
     }
 
-    function demo(req,res){
-        try{
-            const response = new ResponseBody(true, "sucess");
-            res.send(response)
-        }
-        catch(e){
-            errorinuser('demo',e)
-        }
-    
-        }
-   
-        function demo1(req,res){
-            try{
-                var databases=req.body
-                console.log(databases)
-                const response = new ResponseBody(true, "sucess");
-                res.send(response)
-            }
-            catch(e){
-                errorinuser('demo',e)
-            }
-        
-            }
           
-module.exports={registeruser,profile,home_page,demo,demo1}
+module.exports={registeruser,profile,home_page}

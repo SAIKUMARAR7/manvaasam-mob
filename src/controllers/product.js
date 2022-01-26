@@ -64,8 +64,16 @@ async function getallproducts(req,res){
     async function getproduct(req,res){
         try{
             const products = await product.findOne({where:{productid:req.body.productid}})
+            if(products)
+            {
             const response = new ResponseBody(true, "product fetched successfully", products);
             res.send(response)
+            }
+            else{
+                
+            const response = new ResponseBody(true, "No product exists", products);
+            res.send(response)
+            }
         }
         catch(e)
         {

@@ -7,7 +7,4 @@ router.post('/registeruser',user.registeruser);
 router.post('/profile',verify.authenticateToken,user.profile);
 router.post('/home_page',user.home_page);
 
-router.get('/demo',user.demo);
-
-router.post('/demo1',user.demo1);
 module.exports=router;
