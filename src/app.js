@@ -6,7 +6,7 @@ const user=require('./Routes/user_route');
 const address=require('./Routes/address_route');
 const course=require('./Routes/course_route');
 const product=require('./Routes/product_route');
-const purchasedcourses=require('./Routes/purchasedcourses_route');
+
 const auth=require('./Routes/auth_route');
 const order=require('./Routes/order_route');
 const otp=require('./Routes/otp_route');

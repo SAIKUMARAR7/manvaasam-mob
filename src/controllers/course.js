@@ -26,8 +26,9 @@ function addcourse(req,res){
             var coursename=fields.coursename
             var instructor=fields.instructor
             var price=fields.price
+            var description=fields.description
             
-            course.create({courseid:courseid,name:coursename,instructor:instructor,price:price,image:image})
+            course.create({courseid:courseid,name:coursename,instructor:instructor,price:price,image:image,description:description})
             const response = new ResponseBody(true, "course added successfully", {"name":coursename});
             res.send(response)
         });

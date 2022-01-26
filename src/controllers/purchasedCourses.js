@@ -12,12 +12,13 @@ function errorinuser(fn,err)
 
 }
 
-function addpurchasedcourses(req,res){
+async function addpurchasedcourses(req,res){
     try{
-    var userid=req.body.userid
+    const User=await user.findOne({where:{email:req.body.email}});
     var courseid=req.body.courseid
-    var purchasedcoursesid=v4()
-    purchasedcourses.create({purchasedcoursesid:purchasedcoursesid,userid:userid,courseid:courseid})
+    var userid=User.userid
+    var course_orderid=v4()
+    purchasedcourses.create({course_orderid:course_orderid,userid:userid,courseid:courseid})
     const response = new ResponseBody(true, "course purchased successfully", {});
     res.send(response)
     }
@@ -26,7 +27,20 @@ function addpurchasedcourses(req,res){
     }
 
     }
-module.exports={addpurchasedcourses};
+
+async function mycourses(req,res){
+    try{
+    const User=await user.findOne({where:{email:req.body.email}});
+    const My_Course = await purchasedcourses.findAll({where:{userid:User.userid}});
+    const response = new ResponseBody(true, "courses fetched  successfully",My_Course );
+    res.send(response)
+    }
+    catch(e){
+        errorinuser('mycourses',e)
+    }
+
+    }
+module.exports={addpurchasedcourses,mycourses};
 
 
    

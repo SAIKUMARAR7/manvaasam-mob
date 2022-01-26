@@ -6,6 +6,7 @@ module.export=course=sequelize.define('courses',{
     name:{type:Sequelize.STRING,allownull:false},
     instructor:{type:Sequelize.STRING,allowNull:true},
     price:{type:Sequelize.INTEGER,allowNull:false},
-    image:{type:Sequelize.BLOB('medium'),allowNull:true}},{modelName:"courses"})
+    image:{type:Sequelize.BLOB('medium'),allowNull:true},
+    description:{type:Sequelize.STRING,allowNull:false}},{modelName:"courses"})
 
 sequelize.sync()
