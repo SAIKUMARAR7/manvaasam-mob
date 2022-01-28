@@ -64,7 +64,7 @@ async function registeruser(req,res){
 async function profile(req,res){
     try{
         User=await user.findOne({where:{email:req.body.email}})
-        const user_address=await address.findAll({where:{userId:User.userid}});
+        const user_address=await address.findAll({attributes:['Address'],where:{userId:User.userid}});
         user_profile={name:User.name,email:User.email,mobile:User.mobile}
         const response = new ResponseBody(true, "profile fetched sucessfully",{user_profile,user_address});
         res.send(response)
@@ -76,8 +76,9 @@ async function profile(req,res){
 
 async function home_page(req,res){
     try{
-        products=await product.findAll({limit:3,order:[['createdAt','DESC']]})
-        courses=await course.findAll({limit:3,order:[['createdAt','DESC']]})
+        //products=await product.findAll({limit:3,order:[['createdAt','DESC']]})
+        courses=await course.findAll({attributes:['courseid','name','instructor','price','image'],limit:3,order:[['createdAt','DESC']]})
+        products=await product.findAll({attributes:['productid','name','price','image'],limit:3,order:[['createdAt','DESC']]})
         const response = new ResponseBody(true, "profile fetched sucessfully",{products,courses});
         res.send(response)
     }
