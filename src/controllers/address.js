@@ -51,5 +51,25 @@ async function deleteaddress(req,res){
 
     }
 
+    async function updateaddress(req,res){
+        try{
+        const User=await user.findOne({where:{email:req.body.email}});
+        if(User){
+            await address.update({Address:req.body.address},{where:{userid:User.userid}})
+            const response = new ResponseBody(true, "address updated successfully", {});
+            res.send(response);
+        }
+        else{
+            const response = new ResponseBody(false, "User not found", {});
+            res.send(response);
+        }
+        }
+        catch(e){
+            errorinuser('updateaddress',e)
+        }
+    
+        }
+    
+    
 
-module.exports={addaddress,deleteaddress}
+module.exports={addaddress,deleteaddress,updateaddress}
