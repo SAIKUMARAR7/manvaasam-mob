@@ -20,7 +20,7 @@ async function addpurchasedcourses(req,res){
     var ispurchased=await purchasedcourses.findAll({attributes:['courseid'],where:{userid:userid,courseid:courseid}})
     if(ispurchased)
     {
-        const response = new ResponseBody(true, "You have already registered this course", {});
+        const response = new ResponseBody(false, "You have already registered this course", {});
         res.send(response)
         
     }
