@@ -64,9 +64,9 @@ async function registeruser(req,res){
 async function profile(req,res){
     try{
         User=await user.findOne({where:{email:req.body.email}})
-        const user_address=await address.findAll({attributes:['Address'],where:{userId:User.userid}});
+        // const user_address=await address.findAll({attributes:['Address'],where:{userId:User.userid}});
         user_profile={name:User.name,email:User.email,mobile:User.mobile}
-        const response = new ResponseBody(true, "profile fetched sucessfully",{user_profile,user_address});
+        const response = new ResponseBody(true, "profile fetched sucessfully",{user_profile});
         res.send(response)
     }
     catch(e){

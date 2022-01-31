@@ -18,22 +18,18 @@ async function addorder(req,res){
     try{
     const User=await user.findOne({where:{email:req.body.email}});
     const useraddress=await address.findOne({where:{userid:User.userid}});
-    if(useraddress)
-    {
+    
         const orderlist=req.body.userorder;
-        const status='pending'
+        const status='Not yet delivered'
+        const user_address=req.body.address
         // const orderedproduct=await product.findOne({where:{productid:req.body.productid}})
         // const amount=orderedproduct.price * parseInt(req.body.count)
         const orderid=v4()
-        orders.create({orderid:orderid,userid:User.userid,productid:parseInt(req.body.productid),Items:orderlist,Status:status})
+        orders.create({orderid:orderid,userid:User.userid,productid:parseInt(req.body.productid),Items:orderlist,Status:status,Address:user_address})
         const response = new ResponseBody(true, "product ordered successfully", {});
         res.send(response)
-    }
-    else
-    {
-        const response = new ResponseBody(true, "Please add your address before placing order", {});
-        res.send(response)
-    }
+    
+    
 }
     catch(e){
         errorinuser('addorder',e)
