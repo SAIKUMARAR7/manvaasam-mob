@@ -4,6 +4,7 @@ const router= express.Router();
 const app=express()
 const {v4}=require('uuid');
 const {ResponseBody} = require('../utils/response')
+const { Sequelize } = require('sequelize');
 
 function errorinuser(fn,err)
 {
@@ -17,7 +18,7 @@ async function addpurchasedcourses(req,res){
     const User=await user.findOne({where:{email:req.body.email}});
     var courseid=req.body.courseid
     var userid=User.userid
-    var ispurchased=await purchasedcourses.findAll({attributes:['courseid'],where:{userid:User.userid,courseid:courseid}})
+    var ispurchased=await purchasedcourses.findAll({attributes:['courseid'],where:Sequelize.and({userid:User.userid,courseid:courseid})})
     
      if(ispurchased.length>=1)
      {
