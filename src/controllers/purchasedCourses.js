@@ -17,14 +17,15 @@ async function addpurchasedcourses(req,res){
     const User=await user.findOne({where:{email:req.body.email}});
     var courseid=req.body.courseid
     var userid=User.userid
-    var ispurchased=await purchasedcourses.findAll({attributes:['courseid'],where:{userid:userid,courseid:courseid}})
-    if(ispurchased)
-    {
+    var ispurchased=await purchasedcourses.findAll({attributes:['courseid'],where:{userid:User.userid,courseid:courseid}})
+    
+     if(ispurchased.length>=1)
+     {
         const response = new ResponseBody(false, "You have already registered this course", {});
         res.send(response)
         
     }
-    else{
+     else{
     var course_orderid=v4()
     purchasedcourses.create({course_orderid:course_orderid,userid:userid,courseid:courseid})
     const response = new ResponseBody(true, "course purchased successfully", {});
