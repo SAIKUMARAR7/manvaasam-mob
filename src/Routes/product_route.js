@@ -8,7 +8,7 @@ const verify=require('../Middleware/middleware')
 
 router.post('/addproduct',verify.authenticateToken,views.addproduct)
 router.get('/getallproducts',views.getallproducts)
-router.post('/getproduct',verify.authenticateToken,views.getproduct)
+router.post('/getproduct',views.getproduct)
 router.post('/deleteProduct',verify.authenticateToken,views.deleteProduct)
 
 
