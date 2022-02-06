@@ -10,7 +10,7 @@ router.post('/addcourse',verify.authenticateToken,views.addcourse)
 router.get('/getallcourses',views.getallcourses)
 router.post('/deleteCourse',verify.authenticateToken,views.deleteCourse)
 
-router.post('/getCourse',verify.authenticateToken,views.getCourse)
+router.post('/getcourse',verify.authenticateToken,views.getCourse)
 
 router.post('/purchasecourse',verify.authenticateToken,views_buy.addpurchasedcourses)
 
