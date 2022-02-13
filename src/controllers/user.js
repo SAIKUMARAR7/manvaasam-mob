@@ -91,5 +91,14 @@ async function home_page(req,res){
 
     }
 
-          
-module.exports={registeruser,profile,home_page}
+    async function checktoken(req,res){
+        try{
+            const response = new ResponseBody(true, "Token Vaild");
+            res.send(response)
+        }
+        catch(e){
+            errorinuser('checktoken',e)
+        }
+    
+        }     
+module.exports={registeruser,profile,home_page,checktoken}

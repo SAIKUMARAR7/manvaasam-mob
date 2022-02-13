@@ -50,6 +50,40 @@ async function myorders(req,res){
     }
 
     }
-module.exports={addorder,myorders}
+
+    async function allorders(req,res){
+        try{
+        const allorders=await orders.findAll()
+        const response = new ResponseBody(true, "orders fetched successfully", allorders);
+        res.send(response)
+        }
+        catch(e){
+            errorinuser('addorder',e)
+        }
+    
+        }
+
+        async function updatestatus(req,res){
+            try{
+            const orderid=await orders.findOne({where:{orderid:req.body.orderid}});
+            if(orderid){
+                await orders.update({Status:req.body.status},{where:{orderid:req.body.orderid}})
+                const response = new ResponseBody(true, "Order Status updated successfully", {});
+                res.send(response);
+            }
+            else{
+                const response = new ResponseBody(false, "Order not found", {});
+                res.send(response);
+            }
+            }
+            catch(e){
+                errorinuser('updatestatus',e)
+            }
+        
+            }
+        
+        
+    
+module.exports={addorder,myorders,allorders,updatestatus}
 
    
