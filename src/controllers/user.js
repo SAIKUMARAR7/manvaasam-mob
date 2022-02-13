@@ -66,7 +66,7 @@ async function profile(req,res){
         User=await user.findOne({where:{email:req.body.email}})
         // const user_address=await address.findAll({attributes:['Address'],where:{userId:User.userid}});
         user_profile={name:User.name,email:User.email,mobile:User.mobile}
-        const mycourse = await purchasedcourses.findAll({attributes:['courseid']},{where:{userid:User.userid}});
+        const mycourse = await purchasedcourses.findAll({where:{userid:User.userid}});
         // const myproduct=await orders.findAll({attributes:['items','status','orderid','address']},{where:{userid:User.userid}})
         const myorders=await orders.findAll({where:{userid:User.userid}})
         const response = new ResponseBody(true, "profile fetched sucessfully",{user_profile,mycourse,myorders});
