@@ -19,7 +19,7 @@ async function addorder(req,res){
     const User=await user.findOne({where:{email:req.body.email}});
     const useraddress=await address.findOne({where:{userid:User.userid}});
     
-        const orderlist=req.body.userorder;
+        const orderlist=req.body.items;
         const status='Not yet delivered'
         const user_address=req.body.address
         // const orderedproduct=await product.findOne({where:{productid:req.body.productid}})
