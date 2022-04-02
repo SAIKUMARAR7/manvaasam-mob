@@ -9,7 +9,7 @@ router.post('/home_page',user.home_page);
 router.get('/checktoken',verify.authenticateToken,user.checktoken);
 
 //sample to check
-router.get('/checker',(req,res)={
+router.get('/checker',(req,res)=>{
   res.send('Sample Routes working Fine')
 })
 
